@@ -1,0 +1,3 @@
+apex.sh - A shell script to find installed SBo packages on which no other 
+installed packages depend. This script assumes well-maintained sbopkg queue
+files.
