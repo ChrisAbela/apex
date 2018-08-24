@@ -39,7 +39,7 @@ for PKG in $SBP; do
 done
 for PKG1 in $SBPSQF; do
   # Check if we have PKG1 in the Queue files
-  # Let ACC contain the contents of files we will
+  # Let ACC contain the contents of files we will check
   unset ACC
   for PKG2 in $SBPSQF; do
     if [ $PKG1 != $PKG2 ]; then
@@ -49,6 +49,8 @@ for PKG1 in $SBPSQF; do
         ${QUEUEDIR}/${PKG2}.sqf )"
     fi
   done
+  # Some packages names contain +
+  PKG1="$( echo $PKG1 | sed "s/+/\\\+/g" )"
   if  ! echo "$ACC" | egrep -q "^@${PKG1}$|^@${PKG1} | @${PKG1}$| @${PKG1} |^${PKG1}$|^${PKG1} | ${PKG1}$| ${PKG1} "
   then
     echo $PKG1
